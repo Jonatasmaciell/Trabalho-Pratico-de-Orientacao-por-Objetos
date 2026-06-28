@@ -1,1 +1,1 @@
-# Trabalho-Pr-tico-de-Orienta-o-por-Objetos
+# Trabalho-Pratico-de-Orientacao-por-Objetos
