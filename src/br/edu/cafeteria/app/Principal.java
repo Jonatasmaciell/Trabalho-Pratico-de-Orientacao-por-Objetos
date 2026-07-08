@@ -187,11 +187,14 @@ public class Principal {
         scanner.nextLine();
 
         if (opcao == 1) {
-            System.out.print("Novo preço: R$ ");
+         System.out.print("Novo preço: R$ ");
             double novoPreco = scanner.nextDouble();
             scanner.nextLine();
+
+            produto.setPrecoBase(novoPreco);
+
+            System.out.println("Preço atualizado com sucesso!");
          
-            System.out.println("Nota: A classe Produto não possui setter para preço.");
         } else if (opcao == 2) {
             System.out.print("Novo estoque: ");
             int novoEstoque = scanner.nextInt();
