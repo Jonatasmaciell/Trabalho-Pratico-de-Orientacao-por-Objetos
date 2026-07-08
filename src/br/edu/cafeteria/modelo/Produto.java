@@ -25,6 +25,13 @@ public abstract class Produto {
     public double getPrecoBase() {
         return precoBase;
     }
+    
+     public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public void setPrecoBase(double precoBase) {
+        this.precoBase = precoBase;
+    }
 
     public int getEstoque() {
         return estoque;
