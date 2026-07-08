@@ -1,7 +1,17 @@
 package br.edu.cafeteria.app;
 
-import br.edu.cafeteria.excecao.*;
-import br.edu.cafeteria.modelo.*;
+import br.edu.cafeteria.excecao.EstoqueInsuficienteException;
+import br.edu.cafeteria.excecao.PontosInsuficientesException;
+import br.edu.cafeteria.modelo.Atendente;
+import br.edu.cafeteria.modelo.Bebida;
+import br.edu.cafeteria.modelo.Cliente;
+import br.edu.cafeteria.modelo.ClienteStandard;
+import br.edu.cafeteria.modelo.ClienteVIP;
+import br.edu.cafeteria.modelo.Comida;
+import br.edu.cafeteria.modelo.DiaEventoGeek;
+import br.edu.cafeteria.modelo.ItemPedido;
+import br.edu.cafeteria.modelo.Pedido;
+import br.edu.cafeteria.modelo.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -187,7 +197,7 @@ public class Principal {
         scanner.nextLine();
 
         if (opcao == 1) {
-         System.out.print("Novo preço: R$ ");
+            System.out.print("Novo preço: R$ ");
             double novoPreco = scanner.nextDouble();
             scanner.nextLine();
 
@@ -510,7 +520,7 @@ public class Principal {
 
         try {
             pedido.adicionarItem(produto, quantidade);
-            System.out.println("\n Item adicionado ao pedido!");
+            System.out.println("\n✓ Item adicionado ao pedido!");
             System.out.println("  Produto: " + produto.getNome());
             System.out.println("  Quantidade: " + quantidade);
             System.out.println("  Subtotal: R$ " + String.format("%.2f", produto.getPrecoBase() * quantidade));
@@ -545,17 +555,30 @@ public class Principal {
         }
 
         double total = pedido.calcularTotal();
+
         System.out.println("\nTotal do pedido: R$ " + String.format("%.2f", total));
 
+        System.out.println("\nForma de pagamento:");
+        System.out.println("1 - Dinheiro");
+        System.out.println("2 - XP (Cliente VIP)");
+        System.out.print("Escolha: ");
+        int formaPagamento = scanner.nextInt();
+        scanner.nextLine();
+
         try {
-            pedido.finalizarVenda();
+
+            pedido.finalizarVenda(formaPagamento == 2);
+
             pedidos.add(pedido);
-            System.out.println("\n Pedido finalizado com sucesso!");
-            System.out.println("  Número do Pedido: #" + pedido.getNumero());
-            System.out.println("  Total: R$ " + String.format("%.2f", total));
+
+            System.out.println("\nPedido finalizado com sucesso!");
+            System.out.println("Número: " + pedido.getNumero());
+            System.out.println("Total: R$ " + String.format("%.2f", total));
 
         } catch (PontosInsuficientesException e) {
+
             System.out.println(e.getMensagemFormatada());
+
         }
     }
 
