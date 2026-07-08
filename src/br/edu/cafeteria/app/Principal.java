@@ -21,7 +21,7 @@ public class Principal {
     private static List<Produto> produtos = new ArrayList<>();
     private static List<Cliente> clientes = new ArrayList<>();
     private static List<Pedido> pedidos = new ArrayList<>();
-    private static Atendente atendente = new Atendente(1, "Gerenciador de Sistema");
+    private static Atendente atendente = new Atendente(1, "Atendente 1");
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
