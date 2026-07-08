@@ -510,7 +510,7 @@ public class Principal {
 
         try {
             pedido.adicionarItem(produto, quantidade);
-            System.out.println("\n✓ Item adicionado ao pedido!");
+            System.out.println("\n Item adicionado ao pedido!");
             System.out.println("  Produto: " + produto.getNome());
             System.out.println("  Quantidade: " + quantidade);
             System.out.println("  Subtotal: R$ " + String.format("%.2f", produto.getPrecoBase() * quantidade));
@@ -550,7 +550,7 @@ public class Principal {
         try {
             pedido.finalizarVenda();
             pedidos.add(pedido);
-            System.out.println("\n✓ Pedido finalizado com sucesso!");
+            System.out.println("\n Pedido finalizado com sucesso!");
             System.out.println("  Número do Pedido: #" + pedido.getNumero());
             System.out.println("  Total: R$ " + String.format("%.2f", total));
 
