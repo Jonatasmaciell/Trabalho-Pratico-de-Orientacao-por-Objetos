@@ -86,34 +86,39 @@ public class Pedido {
 
     }
     
-    public void finalizarVenda()
-            throws PontosInsuficientesException {
+   public void finalizarVenda(boolean usarXP)
+        throws PontosInsuficientesException {
 
-        for(ItemPedido item : itens){
+    double total = calcularTotal();
 
-            item.getProduto()
-                .baixarEstoque(item.getQuantidade());
+    if (usarXP) {
 
+        if (!(cliente instanceof ClienteVIP)) {
+            throw new PontosInsuficientesException(
+                    "Apenas clientes VIP podem pagar com XP.");
         }
 
-        double total = calcularTotal();
+        ClienteVIP vip = (ClienteVIP) cliente;
 
-        if(cliente instanceof ClienteVIP){
+        int xpNecessario = (int) (total * 10);
 
-            ClienteVIP vip = (ClienteVIP) cliente;
-
-           
-            cliente.adicionarXP(
-                    cliente.calcularXP(total));
-
+        if (vip.getXp() < xpNecessario) {
+            throw new PontosInsuficientesException(
+                    "XP insuficiente para finalizar a compra.");
         }
 
-        else if(cliente != null){
+        vip.removerXP(xpNecessario);
 
-            cliente.adicionarXP(
-                    cliente.calcularXP(total));
+    } else {
 
+        if (cliente != null) {
+            cliente.adicionarXP(cliente.calcularXP(total));
         }
 
     }
+
+    for (ItemPedido item : itens) {
+        item.getProduto().baixarEstoque(item.getQuantidade());
+    }
+}
 }
